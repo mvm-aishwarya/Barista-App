@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2;
+package baristamaticApp;
 
-import baristamaticv2.menu.MenuItem;
-import baristamaticv2.menu.SingleMenu;
+import baristamaticApp.menu.MenuItem;
+import baristamaticApp.menu.SingleMenu;
 import java.util.Scanner;
 
 /**
  *
  * @author Aishwarya
  */
-public class BaristamaticV2 {
+public class BaristamaticApp {
 
     private static final String ENTER_CHOICE = "\nInput: ";
-    //Single Menu - Singletons    
+    private static final String QUIT_MESSAGE = "\nQuit Baristamatic successfult! ";
+    private static final String RESTOCK_MESSAGE = "\nRe-stock inventory successful! ";
+    //Single Menu - Singleton   
     private static SingleMenu objSingleMenu = null;
     private static Scanner scanner = null;
 
@@ -30,8 +32,7 @@ public class BaristamaticV2 {
         objSingleMenu.initializeMenu();
 
         //Start here
-        boolean isQuit = false;
-        int userInput = 0;
+        boolean isQuit = false;       
         System.out.println(userGeneralInstruction());
         scanner = new Scanner(System.in);
         while (true) {
@@ -46,52 +47,28 @@ public class BaristamaticV2 {
                 userSelection = scanner.nextLine();
 
                 //always get the first character and convert to numeric.
-                userInput = Character.getNumericValue(userSelection.charAt(0));
+                //userInput = Character.getNumericValue(userSelection.charAt(0));
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
             }
             String messageToDisplay = "";
             MenuItem drink;
-            switch (userInput) {
-                case 1:
-                    drink = objSingleMenu.getObjListMenuItem().get(0);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);
-                    break;
-                case 2:
-                    drink = objSingleMenu.getObjListMenuItem().get(1);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);                    
-                    break;
-                case 3:
-                    drink = objSingleMenu.getObjListMenuItem().get(2);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);
-                    break;
-                case 4:
-                    drink = objSingleMenu.getObjListMenuItem().get(3);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);
-                    break;
-                case 5:
-                    drink = objSingleMenu.getObjListMenuItem().get(4);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);
-                    break; 
-                case 6:
-                    drink = objSingleMenu.getObjListMenuItem().get(5);
-                    messageToDisplay = objSingleMenu.dispenseDrink(drink);
-                    break;
-
-                //case 81:
-                case 26:
-                    isQuit = true;
-                    System.out.println("\nQuitting!!");
-                    break;
-
-                case 27:
-                    objSingleMenu.initializeInventoryStock();
-                    System.out.println("\nStock refilled!");
-                    break;
-                default:
-                    messageToDisplay = "Invalid entry " + userSelection;
+            int menuItemLength = objSingleMenu.getObjListMenuItem().size();
+            if("q".equals(userSelection)||"Q".equals(userSelection)){
+                 isQuit = true;
+                 messageToDisplay = QUIT_MESSAGE;
+                
+            } else if("r".equals(userSelection)||"R".equals(userSelection)){
+                objSingleMenu.initializeInventoryStock();
+                messageToDisplay = RESTOCK_MESSAGE;
             }
-            
+            else if(Character.getNumericValue(userSelection.charAt(0))<= menuItemLength){
+                 drink = objSingleMenu.getObjListMenuItem().get(Integer.parseInt(userSelection) - 1);
+                 messageToDisplay = objSingleMenu.dispenseDrink(drink);
+            }
+            else{
+                 messageToDisplay = "Invalid entry " + userSelection;                
+            }                                               
             objSingleMenu.checkAllDrinkAvailability();
 
             if (isQuit) {

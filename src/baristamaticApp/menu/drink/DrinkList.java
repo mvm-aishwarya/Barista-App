@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2.menu.drink;
+package baristamaticApp.menu.drink;
 
-import baristamaticv2.menu.MenuItem;
 import java.util.HashMap;
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2.menu;
+package baristamaticApp.menu;
 
 import java.util.HashMap;
 import java.util.Comparator;
@@ -20,10 +20,7 @@ public class MenuItem {
     
     private HashMap<String,Integer> drinkIngredient;
     
-     public MenuItem(){
-        drinkName = "";
-        drinkPrice = "";
-        isInStock = true;       
+     public MenuItem(){             
     }
     public MenuItem(String dName, HashMap<String,Integer> dIngredient, String dPrice, boolean dStock){
         this.drinkName = dName;
@@ -88,7 +85,9 @@ public class MenuItem {
         this.drinkIngredient = drinkIngredient;
     }
     
-    
+    /**
+     * Comparator to sort the MenuItem according to drink name
+     */
     
     public static Comparator<MenuItem> menuNameComparator = new Comparator<MenuItem>() {
 

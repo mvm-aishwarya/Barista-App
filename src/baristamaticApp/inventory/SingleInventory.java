@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2.inventory;
+package baristamaticApp.inventory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Collections;
 
 /**
  *
@@ -40,7 +37,8 @@ public class SingleInventory implements Inventory{
     
     @Override
     public void initializePrice() {
-        objListInventoryItem = new ArrayList<>();       
+        objListInventoryItem = new ArrayList<>(); 
+        Collections.sort(objListInventoryItem, InventoryItem.itemNameComparator);
         objListInventoryItem.add(new InventoryItem("Coffee", 0.75, CAPACITY));
         objListInventoryItem.add(new InventoryItem("Sugar", 0.25, CAPACITY));
         objListInventoryItem.add(new InventoryItem("Cream", 0.25, CAPACITY));
@@ -49,8 +47,7 @@ public class SingleInventory implements Inventory{
         objListInventoryItem.add(new InventoryItem("Steamed milk", 0.35, CAPACITY));
         objListInventoryItem.add(new InventoryItem("Cocoa", 0.90, CAPACITY));
         objListInventoryItem.add(new InventoryItem("Whipped Cream", 1.00, CAPACITY));        
-        objListInventoryItem.add(new InventoryItem("Foamed milk", 0.35, CAPACITY));
-               
+        objListInventoryItem.add(new InventoryItem("Foamed milk", 0.35, CAPACITY));               
     }
 
     @Override

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2.inventory;
+package baristamaticApp.inventory;
+
+import java.util.Comparator;
 
 /**
  *
@@ -25,6 +27,20 @@ public class InventoryItem {
         this.itemCapacity = iCapacity;
     }
      
+     /**
+     * Comparator to sort the MenuItem according to drink name
+     */
+    
+    public static Comparator<InventoryItem> itemNameComparator = new Comparator<InventoryItem>() {
+
+        @Override
+	public int compare(InventoryItem item1, InventoryItem item2) {
+	   String itemName1 = item1.getItemName().toUpperCase();
+	   String itemName2 = item2.getItemName().toUpperCase();
+
+	   //ascending order
+	   return itemName1.compareTo(itemName2);
+    }};
 
     /**
      * @return the itemName

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baristamaticv2.menu;
+package baristamaticApp.menu;
 
-import baristamaticv2.inventory.InventoryItem;
-import baristamaticv2.inventory.SingleInventory;
-import baristamaticv2.menu.drink.DrinkList;
+import baristamaticApp.inventory.InventoryItem;
+import baristamaticApp.inventory.SingleInventory;
+import baristamaticApp.menu.drink.DrinkList;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,8 @@ import java.util.Set;
  */
 public class SingleMenu implements Menu {
 
+    private static final String DISPENSING_MESSAGE = "\nDispensing: ";
+    private static final String OUTOFSTOCK_MESSAGE = "\nOut of stock: ";
     private static final String MENU_HEADING = "\nMenu:\n";
     private ArrayList<MenuItem> objListMenuItem = null;
     private boolean isAvailable = true;
@@ -92,10 +94,10 @@ public class SingleMenu implements Menu {
 
     @Override
     public String getDrinkCost(HashMap<String, Integer> recipe) {
-        String totalCost = "";
-        String consumedKey = "";
+        String totalCost;
+        String consumedKey;
 
-        int consumedUnit = 0;
+        int consumedUnit;
         double eachIngredientCost = 0.0;
         double computeCost = 0.0;
 
@@ -129,7 +131,7 @@ public class SingleMenu implements Menu {
         ArrayList<InventoryItem> listItem = objSingleInventory.getObjListInventoryItem();
 
         int consumedUnit = 0;
-        String consumedKey = "";
+        String consumedKey;
         int availableUnit = 0;
 
         for (Map.Entry<String, Integer> consumed : ingredientConsumed) {
@@ -161,7 +163,7 @@ public class SingleMenu implements Menu {
         ArrayList<InventoryItem> listItem = objSingleInventory.getObjListInventoryItem();
 
         int consumedUnit = 0;
-        String consumedKey = "";
+        String consumedKey;
         int availableUnit = 0;
 
         for (Map.Entry<String, Integer> consumed : ingredientConsumed) {
@@ -188,13 +190,12 @@ public class SingleMenu implements Menu {
     public String dispenseDrink(MenuItem dispenseDrink) {
         if (checkDrinkAvailability(dispenseDrink)) {
             objSingleMenu.reduceResource(dispenseDrink.getDrinkIngredient());
-            String message = "Dispensing: " + dispenseDrink.getDrinkName();
+            String message = DISPENSING_MESSAGE + dispenseDrink.getDrinkName();
             return message;
         } else {
-            String message = "Out of stock: " + dispenseDrink.getDrinkName();
+            String message = OUTOFSTOCK_MESSAGE + dispenseDrink.getDrinkName();
             return message;
-        }
-        //System.out.println("Dispensing: " +this.getDrinkName());
+        }       
     }
 
 
@@ -204,8 +205,8 @@ public class SingleMenu implements Menu {
      */
     public void checkAllDrinkAvailability() {
         for (MenuItem eachItem : objListMenuItem) {
-            boolean isAvailable = isDrinkInStock(eachItem.getDrinkIngredient());
-            updateDrinkAvailability(eachItem.getDrinkName(), isAvailable);
+            boolean isDrinkAvailable = isDrinkInStock(eachItem.getDrinkIngredient());
+            updateDrinkAvailability(eachItem.getDrinkName(), isDrinkAvailable);
         }
     }
     
@@ -216,9 +217,9 @@ public class SingleMenu implements Menu {
      * @return boolean: true if available, false otherwise
      */
     private boolean checkDrinkAvailability(MenuItem checkItem) {
-        boolean isAvailable = isDrinkInStock(checkItem.getDrinkIngredient());
-        objSingleMenu.updateDrinkAvailability(checkItem.getDrinkName(), isAvailable);
-        return isAvailable;
+        boolean isDrinkAvailable = isDrinkInStock(checkItem.getDrinkIngredient());
+        objSingleMenu.updateDrinkAvailability(checkItem.getDrinkName(), isDrinkAvailable);
+        return isDrinkAvailable;
     }
     
     /**
