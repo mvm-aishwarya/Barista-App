@@ -8,12 +8,13 @@ package baristamaticApp.inventory;
 import java.util.Comparator;
 
 /**
- *
+ * Contains the properties of each inventory item
  * @author Aishwarya
  */
 public class InventoryItem {   
     
-    private int itemCapacity;
+    //Fix item capacity.
+    private int itemCapacity = 10;
     private String itemName;
     private double itemPricePerUnit;
     
@@ -21,10 +22,9 @@ public class InventoryItem {
         
     }
     
-    public InventoryItem(String iName, double iPricePerUnit, int iCapacity){
+    public InventoryItem(String iName, double iPricePerUnit){
         this.itemName = iName;
-        this.itemPricePerUnit = iPricePerUnit; 
-        this.itemCapacity = iCapacity;
+        this.itemPricePerUnit = iPricePerUnit;         
     }
      
      /**

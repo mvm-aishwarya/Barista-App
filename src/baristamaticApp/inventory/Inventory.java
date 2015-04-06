@@ -6,7 +6,7 @@
 package baristamaticApp.inventory;
 
 /**
- *
+ * Interface for inventory functions
  * @author Aishwarya
  */
 public interface Inventory {

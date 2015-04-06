@@ -9,25 +9,40 @@ import java.util.HashMap;
 import java.util.Comparator;
 
 /**
- *
+ * Contains the properties of each menu item
  * @author Aishwarya
  */
 public class MenuItem {
     
     private String drinkName;
     private String drinkPrice;
-    private boolean isInStock;
+    // Each menu item is available at first.
+    private boolean isInStock = true;
     
     private HashMap<String,Integer> drinkIngredient;
     
      public MenuItem(){             
     }
-    public MenuItem(String dName, HashMap<String,Integer> dIngredient, String dPrice, boolean dStock){
+    public MenuItem(String dName, HashMap<String,Integer> dIngredient, String dPrice){
         this.drinkName = dName;
         this.drinkIngredient = dIngredient;
-        this.drinkPrice = dPrice;
-        this.isInStock = dStock;
+        this.drinkPrice = dPrice;       
     }
+    
+    /**
+     * Comparator to sort the MenuItem according to drink name
+     */
+    
+    public static Comparator<MenuItem> menuNameComparator = new Comparator<MenuItem>() {
+
+        @Override
+	public int compare(MenuItem item1, MenuItem item2) {
+	   String itemName1 = item1.getDrinkName().toUpperCase();
+	   String itemName2 = item2.getDrinkName().toUpperCase();
+
+	   //ascending order
+	   return itemName1.compareTo(itemName2);
+    }};
     
     /**
      * @return the drinkName
@@ -83,19 +98,5 @@ public class MenuItem {
      */
     public void setDrinkIngredient(HashMap<String,Integer> drinkIngredient) {
         this.drinkIngredient = drinkIngredient;
-    }
-    
-    /**
-     * Comparator to sort the MenuItem according to drink name
-     */
-    
-    public static Comparator<MenuItem> menuNameComparator = new Comparator<MenuItem>() {
-
-	public int compare(MenuItem item1, MenuItem item2) {
-	   String itemName1 = item1.getDrinkName().toUpperCase();
-	   String itemName2 = item2.getDrinkName().toUpperCase();
-
-	   //ascending order
-	   return itemName1.compareTo(itemName2);
-    }};
+    }        
 }

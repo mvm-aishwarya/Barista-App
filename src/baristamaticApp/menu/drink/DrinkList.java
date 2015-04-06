@@ -8,7 +8,7 @@ package baristamaticApp.menu.drink;
 import java.util.HashMap;
 
 /**
- *
+ * List of drink recipes
  * @author Aishwarya
  */
 public class DrinkList {

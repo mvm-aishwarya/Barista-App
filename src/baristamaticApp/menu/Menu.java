@@ -8,7 +8,7 @@ package baristamaticApp.menu;
 import java.util.HashMap;
 
 /**
- *
+ * Interface for common menu functions
  * @author Aishwarya
  */
 public interface Menu {

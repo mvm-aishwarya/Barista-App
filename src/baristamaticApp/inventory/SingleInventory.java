@@ -9,66 +9,76 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *
+ * Single inventory which holds the list of items.
  * @author Aishwarya
  */
-public class SingleInventory implements Inventory{
-    
+public class SingleInventory implements Inventory {
+
     private static final int CAPACITY = 10;
+    private static final String EMPTY_STRING = "";
+    private static final String EXCEPTION_MESSAGE = "\nException: ";
     private static final String INVENTORY_HEADING = "\nInventory:\n";
-    private static SingleInventory objSingleInventory = null;   
-    
+    private static final String COMMA = ",";
+    private static final String NEXT_LINE = "\n";
+    private static SingleInventory objSingleInventory = null;
+
+    //Holds arraylist of inventory items
     private ArrayList<InventoryItem> objListInventoryItem = null;
 
-    private SingleInventory(){             
+    private SingleInventory() {
     }
+
     /**
-     * Creating single instance of the inventory     
+     * Creating single instance of the inventory
+     *
      * @return instance
      */
-    public static SingleInventory getInstance() {             
+    public static SingleInventory getInstance() {
         if (objSingleInventory == null) {
             objSingleInventory = new SingleInventory();
         }
 
         return objSingleInventory;
-    }       
-    
-    
+    }
+
     @Override
     public void initializePrice() {
-        objListInventoryItem = new ArrayList<>(); 
-        Collections.sort(objListInventoryItem, InventoryItem.itemNameComparator);
-        objListInventoryItem.add(new InventoryItem("Coffee", 0.75, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Sugar", 0.25, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Cream", 0.25, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Decaf Coffee", 0.75, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Espresso", 1.10, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Steamed milk", 0.35, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Cocoa", 0.90, CAPACITY));
-        objListInventoryItem.add(new InventoryItem("Whipped Cream", 1.00, CAPACITY));        
-        objListInventoryItem.add(new InventoryItem("Foamed milk", 0.35, CAPACITY));               
+        objListInventoryItem = new ArrayList<>();
+        objListInventoryItem.add(new InventoryItem("Coffee", 0.75));
+        objListInventoryItem.add(new InventoryItem("Sugar", 0.25));
+        objListInventoryItem.add(new InventoryItem("Cream", 0.25));
+        objListInventoryItem.add(new InventoryItem("Decaf Coffee", 0.75));
+        objListInventoryItem.add(new InventoryItem("Espresso", 1.10));
+        objListInventoryItem.add(new InventoryItem("Steamed milk", 0.35));
+        objListInventoryItem.add(new InventoryItem("Cocoa", 0.90));
+        objListInventoryItem.add(new InventoryItem("Whipped Cream", 1.00));
+        objListInventoryItem.add(new InventoryItem("Foamed milk", 0.35));
     }
 
     @Override
     public void initializeStock() {
-        for(InventoryItem item: objListInventoryItem){
-            item.setItemCapacity(CAPACITY);        
-        }        
+        for (InventoryItem item : objListInventoryItem) {
+            item.setItemCapacity(CAPACITY);
+        }
 
     }
-    
+
     @Override
     public String getInventoryDetails() {
         StringBuilder builderDetails = new StringBuilder();
-        builderDetails.append(INVENTORY_HEADING);                
-       for(InventoryItem item: getObjListInventoryItem()){
-            builderDetails.append(item.getItemName());
-            builderDetails.append(",");
-            builderDetails.append(item.getItemCapacity());
-            builderDetails.append("\n");
+        try {
+            builderDetails.append(INVENTORY_HEADING);
+            Collections.sort(objListInventoryItem, InventoryItem.itemNameComparator);
+            for (InventoryItem item : getObjListInventoryItem()) {
+                builderDetails.append(item.getItemName());
+                builderDetails.append(COMMA);
+                builderDetails.append(item.getItemCapacity());
+                builderDetails.append(NEXT_LINE);
+            }
+        } catch (IndexOutOfBoundsException | NullPointerException inex) {
+            System.out.println(EXCEPTION_MESSAGE + inex.getMessage());
+            builderDetails.append(EMPTY_STRING);
         }
-
         return builderDetails.toString();
     }
 
