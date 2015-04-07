@@ -13,5 +13,9 @@ BaristamaticApp:
   
 BaristaTest:
  It contains JUnit test cases for major functionalities of the application.
+ 
+To add a new menu item:                                                    
+1. In DrinkList class, add a new function with the newDrink recipe(HashMap<String, Integer>).                                   
+2. In SingleMenu class, add the newDrink to the ArrayList, inside the function initializeMenu().
   
  
