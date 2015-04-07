@@ -15,7 +15,7 @@ public class DrinkList {
 
     private static HashMap<String, Integer> recipe = null;
 
-    public static HashMap<String, Integer> coffeeRecipe() {
+    public static HashMap<String, Integer> CoffeeRecipe() {
         recipe = new HashMap<>();
         recipe.put("Coffee", 3);
         recipe.put("Sugar", 1);

@@ -65,7 +65,7 @@ public class SingleMenu implements Menu {
     public void initializeMenu() {
         objListMenuItem = new ArrayList<>();
 
-        objListMenuItem.add(new MenuItem("Coffee", DrinkList.coffeeRecipe(), getDrinkCost(DrinkList.coffeeRecipe())));
+        objListMenuItem.add(new MenuItem("Coffee", DrinkList.CoffeeRecipe(), getDrinkCost(DrinkList.CoffeeRecipe())));
         objListMenuItem.add(new MenuItem("Decaf Coffee", DrinkList.DecafCoffeeRecipe(), getDrinkCost(DrinkList.DecafCoffeeRecipe())));
         objListMenuItem.add(new MenuItem("Cafe Latte", DrinkList.CafeLatteRecipe(), getDrinkCost(DrinkList.CafeLatteRecipe())));
 
