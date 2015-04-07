@@ -10,6 +10,7 @@ import java.util.Collections;
 
 /**
  * Single inventory which holds the list of items.
+ *
  * @author Aishwarya
  */
 public class SingleInventory implements Inventory {
@@ -17,9 +18,9 @@ public class SingleInventory implements Inventory {
     private static final int CAPACITY = 10;
     private static final String EMPTY_STRING = "";
     private static final String EXCEPTION_MESSAGE = "\nException: ";
-    private static final String INVENTORY_HEADING = "\nInventory:\n";
+    private static final String INVENTORY_HEADING = "Inventory: ";
     private static final String COMMA = ",";
-    private static final String NEXT_LINE = "\n";
+    private static final String DOUBLE_NEXT_LINE = "\n\n";
     private static SingleInventory objSingleInventory = null;
 
     //Holds arraylist of inventory items
@@ -66,14 +67,15 @@ public class SingleInventory implements Inventory {
     @Override
     public String getInventoryDetails() {
         StringBuilder builderDetails = new StringBuilder();
-        try {
+        try {            
             builderDetails.append(INVENTORY_HEADING);
+            builderDetails.append(DOUBLE_NEXT_LINE);
             Collections.sort(objListInventoryItem, InventoryItem.itemNameComparator);
             for (InventoryItem item : getObjListInventoryItem()) {
                 builderDetails.append(item.getItemName());
                 builderDetails.append(COMMA);
                 builderDetails.append(item.getItemCapacity());
-                builderDetails.append(NEXT_LINE);
+                builderDetails.append(DOUBLE_NEXT_LINE);
             }
         } catch (IndexOutOfBoundsException | NullPointerException inex) {
             System.out.println(EXCEPTION_MESSAGE + inex.getMessage());

@@ -21,13 +21,13 @@ import java.util.Set;
  */
 public class SingleMenu implements Menu {
 
-    private static final String COMMA = ",";
-    private static final String NEXT_LINE = "\n";
+    private static final String COMMA = ",";    
+    private static final String DOUBLE_NEXT_LINE = "\n\n";    
     private static final String NO_COST = "$0.00";
     private static final String EMPTY_STRING = "";
-    private static final String DISPENSING_MESSAGE = "\nDispensing: ";
-    private static final String OUTOFSTOCK_MESSAGE = "\nOut of stock: ";
-    private static final String MENU_HEADING = "\nMenu:\n";
+    private static final String DISPENSING_MESSAGE = "Dispensing: ";
+    private static final String OUTOFSTOCK_MESSAGE = "Out of stock: ";
+    private static final String MENU_HEADING = "Menu:";
     private static final String EXCEPTION_MESSAGE = "\nException: ";
 
     private ArrayList<MenuItem> objListMenuItem = null;
@@ -57,7 +57,7 @@ public class SingleMenu implements Menu {
      * Calls the initialize stock method in SingeInventory. Initialize the stock
      * of ingredients when user presses 'R' or 'r'
      */
-    public void initializeInventoryStock() {
+    public void reinitializeInventoryStock() {
         objSingleInventory.initializeStock();
     }
 
@@ -83,6 +83,7 @@ public class SingleMenu implements Menu {
         try {
             Collections.sort(objListMenuItem, MenuItem.menuNameComparator);
             builderDetails.append(MENU_HEADING);
+            builderDetails.append(DOUBLE_NEXT_LINE);
 
             //for each item in the available menu loop through
             for (MenuItem item : getObjListMenuItem()) {
@@ -93,7 +94,7 @@ public class SingleMenu implements Menu {
                 builderDetails.append(item.getDrinkPrice());
                 builderDetails.append(COMMA);
                 builderDetails.append(item.isIsInStock());
-                builderDetails.append(NEXT_LINE);
+                 builderDetails.append(DOUBLE_NEXT_LINE);
                 index++;
             }
         } catch (IndexOutOfBoundsException | NullPointerException inex) {

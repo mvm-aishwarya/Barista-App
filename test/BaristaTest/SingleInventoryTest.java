@@ -1,3 +1,5 @@
+package BaristaTest;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,16 +20,16 @@ import static org.junit.Assert.*;
  */
 public class SingleInventoryTest {
     
-    SingleInventory itemInstance = null;
+    private static SingleInventory inventoryInstance = null;
     
-    public SingleInventoryTest() {
-        itemInstance = SingleInventory.getInstance();
-        itemInstance.initializePrice();
-        itemInstance.initializeStock();
+    public SingleInventoryTest() {       
     }
     
     @BeforeClass
     public static void setUpClass() {
+        inventoryInstance = SingleInventory.getInstance();
+        inventoryInstance.initializePrice();
+        inventoryInstance.initializeStock();
     }
     
     @AfterClass
@@ -42,13 +44,17 @@ public class SingleInventoryTest {
     public void tearDown() {
     }
 
+    /**
+     * Single Inventory: Get details of inventory items to display
+     */
     @Test
     public void testGetInventoryDetails() {
         System.out.println("---------- getInventoryDetails ----------"); 
         
         String expResult = "";        
-        String result = itemInstance.getInventoryDetails();
-        assertTrue(result.length() > expResult.length());
+        String result = inventoryInstance.getInventoryDetails();
+        assertTrue(result.length() > expResult.length());       
     }
+        
        
 }
